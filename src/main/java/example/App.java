@@ -9,4 +9,10 @@ public class App
 	public void notCovered() {
 		System.out.println("notCovered");
 	}
+	public void sonarBlocker() {
+  int j = 0;
+  while (true) { // Noncompliant; end condition omitted
+    j++;
+  }
+ }
 }
