@@ -34,7 +34,8 @@ sonar:
   script: 
     - export PATH="$PATH:/root/.dotnet/tools"
     - export SONAR_SCANNER_OPTS
-    - sudo apt-get install openjdk-8-jre
+    - apt-get update
+    - apt-get install openjdk-8-jre -y
     #- dotnet tool install --global dotnet-sonarscanner
     - dotnet tool install --global dotnet-sonarscanner --version 4.4.2
     #- dotnet tool install --global coverlet.console
