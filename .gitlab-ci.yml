@@ -1,0 +1,41 @@
+image: microsoft/dotnet:latest
+
+stages:
+  - test
+  - code_analysis
+  - deploy
+
+release:
+  stage: deploy
+  only:
+    - master
+  artifacts:
+    paths:
+      - publish/
+  script:
+    # The output path is relative to the position of the csproj-file
+     - dotnet publish -c Release -o  MyProject/MyProject.csproj
+
+
+test:
+  stage: test
+  variables:
+    test_path: ./tests/SGP.Scripts.Tests/"
+  script:
+    - "cd $test_path"
+    - "dotnet test"
+  only:
+      - develop
+
+sonar:
+  stage: code_analysis
+  script: 
+    - export PATH="$PATH:/root/.dotnet/tools"
+    - dotnet tool install --global dotnet-sonarscanner
+    - dotnet tool install --global coverlet.console
+    - dotnet test ./tests/SGP.Scripts.Tests/SGP.Scripts.Tests.csproj --configuration Debug --output ../../output-tests  /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput='./output-coverage/coverage.opencover.xml' /p:ExcludeByFile="tests/**"
+    - dotnet sonarscanner begin /k:"$SONAR_PROJECT_KEY" /d:sonar.host.url="$SONAR_HOST_URL" /d:sonar.login="$SONAR_LOGIN"
+    - dotnet build
+    - dotnet sonarscanner end /d:sonar.login="$SONAR_LOGIN"
+  only:
+    - develop
