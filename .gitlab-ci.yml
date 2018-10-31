@@ -23,6 +23,7 @@ test:
     test_path: "./teste-api"
   script:
     - "cd $test_path"
+    - "dotnet build"
     - "dotnet test"
   only:
       - develop
