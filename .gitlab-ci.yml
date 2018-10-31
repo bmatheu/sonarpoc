@@ -1,7 +1,7 @@
 image: microsoft/dotnet:latest
 
 stages:
-  - test
+  #- test
   - code_analysis
   - deploy
 
