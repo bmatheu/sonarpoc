@@ -16,16 +16,16 @@ release:
      - dotnet publish -c Release -o  MyProject/MyProject.csproj
 
 
-test:
-  stage: test
-  variables:
-    test_path: "./"
-  script:
-    - "cd $test_path"
-    - "dotnet build"
-    - "dotnet test"
-  only:
-      - develop
+#test:
+#  stage: test
+#  variables:
+#    test_path: "./"
+#  script:
+#    - "cd $test_path"
+#    - "dotnet build"
+#    - "dotnet test"
+#  only:
+#      - develop
 
 sonar:
   stage: code_analysis
