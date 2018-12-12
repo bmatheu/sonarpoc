@@ -23,7 +23,7 @@ test:
     test_path: "./"
   script:
     - "cd $test_path"
-    #- "dotnet build"
+    - "dotnet build"
     - "dotnet test"
   only:
       - develop
@@ -37,12 +37,13 @@ sonar:
     - export SONAR_SCANNER_OPTS
     - apt-get update
     - apt-get install openjdk-8-jre -y
-    #- dotnet tool install --global dotnet-sonarscanner
     - dotnet tool install --global dotnet-sonarscanner --version 4.4.2
+    
     #- dotnet tool install --global coverlet.console
     #- dotnet test ./ --configuration Debug --output ../../output-tests  /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput='./output-coverage/coverage.opencover.xml' /p:ExcludeByFile="tests/**"
-    - dotnet sonarscanner begin /k:"$SONAR_PROJECT_KEY" /d:sonar.host.url="$SONAR_URL" /d:sonar.login=4d76689af3fa5efc43740346ba02c8d77331c998
+    
+    - dotnet sonarscanner begin /k:"$SONAR_PROJECT_KEY" /d:sonar.host.url="$SONAR_URL" /d:sonar.login="SONAR_TOKEN"
     - dotnet build
-    - dotnet sonarscanner end /d:sonar.login=4d76689af3fa5efc43740346ba02c8d77331c998
+    - dotnet sonarscanner end /d:sonar.login="$SONAR_TOKEN"
   only:
     - develop
