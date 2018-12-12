@@ -1,7 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <IsTestProject>true<IsTestProject>
-  
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
