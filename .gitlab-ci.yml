@@ -41,7 +41,7 @@ sonar:
     - dotnet tool install --global dotnet-sonarscanner --version 4.4.2
     #- dotnet tool install --global coverlet.console
     #- dotnet test ./ --configuration Debug --output ../../output-tests  /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput='./output-coverage/coverage.opencover.xml' /p:ExcludeByFile="tests/**"
-    - dotnet sonarscanner begin /k:"csharp" /d:sonar.host.url=http://ip172-18-0-24-bg86280v0j3g00ed36p0-9000.direct.labs.play-with-docker.com /d:sonar.login=4d76689af3fa5efc43740346ba02c8d77331c998
+    - dotnet sonarscanner begin /k:"SONAR_PROJECT_KEY" /d:sonar.host.url="SONAR_URL" /d:sonar.login=4d76689af3fa5efc43740346ba02c8d77331c998
     - dotnet build
     - dotnet sonarscanner end /d:sonar.login=4d76689af3fa5efc43740346ba02c8d77331c998
   only:
