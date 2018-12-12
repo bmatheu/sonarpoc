@@ -20,7 +20,7 @@ release:
 test:
   stage: test
   variables:
-    test_path: "./"
+    test_path: "teste-api/"
   script:
     - "cd $test_path"
     - "dotnet build"
