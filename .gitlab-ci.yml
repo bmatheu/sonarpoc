@@ -42,7 +42,7 @@ sonar:
     #- dotnet tool install --global coverlet.console
     #- dotnet test ./ --configuration Debug --output ../../output-tests  /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput='./output-coverage/coverage.opencover.xml' /p:ExcludeByFile="tests/**"
     
-    - dotnet sonarscanner begin /k:"$SONAR_PROJECT_KEY" /d:sonar.host.url="$SONAR_URL" /d:sonar.login="$SONAR_TOKEN"
+    - dotnet sonarscanner begin /k:"$SONAR_PROJECT_KEY" /d:sonar.host.url="$SONAR_URL" /d:sonar.login="$SONAR_TOKEN" /d:sonar.gitlab.failure_notification_mode=exit-code
     - dotnet build
     - dotnet sonarscanner end /d:sonar.login="$SONAR_TOKEN"
   only:
