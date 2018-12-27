@@ -1,7 +1,12 @@
 # SonarQube Examplo de Configuração
 -----------------------------------------------------------------------------------------------------------
 
+
+
 #### Descrição: Exemplo de integração entre Gitlab CI e SonarQube em um projeto Maven.
+
+![Quality Gate](http://ip172-18-0-40-bgi44p0v0j3g00b3moqg-9000.direct.labs.play-with-docker.com/api/project_badges/measure?project=csharp&metric=alert_status)
+
 
 Artigo: [Adicionando Code Analysis ao seu pipeline com SonarQube e GitLab CI](https://medium.com/@jeanmorais/adicionando-code-analysis-ao-seu-pipeline-com-sonarqube-e-gitlab-ci-1dab39aa3f75)
 
