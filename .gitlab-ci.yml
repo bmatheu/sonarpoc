@@ -22,13 +22,15 @@ sonarqube:issues:
     - mvn --batch-mode verify sonar:sonar -DskipTests=true -Drevision=$REVISION_UNSTABLE -Dsonar.host.url=$SONAR_URL -Dsonar.login=$SONAR_LOGIN -Dsonar.gitlab.project_id=$CI_PROJECT_PATH -Dsonar.gitlab.ref_name=$CI_COMMIT_REF_NAME -Dsonar.gitlab.commit_sha=$CI_COMMIT_SHA -Dsonar.gitlab.failure_notification_mode=exit-code -Dsonar.analysis.mode=issues
   only:
     - develop
+  allow_failure: true    
 
 sonarqube:publish:
   stage: code_analysis
   script:
-    - mvn --batch-mode verify sonar:sonar -Drevision=$REVISION_STABLE -Dsonar.host.url=$SONAR_URL -Dsonar.login=$SONAR_LOGIN -Dsonar.gitlab.project_id=$CI_PROJECT_PATH -Dsonar.gitlab.ref_name=$CI_COMMIT_REF_NAME -Dsonar.gitlab.commit_sha=$CI_COMMIT_SHA -Dsonar.gitlab.failure_notification_mode=exit-code -Dsonar.analysis.mode=publish
+    - mvn --batch-mode verify sonar:sonar -Drevision=$REVISION_UNSTABLE -Dsonar.host.url=$SONAR_URL -Dsonar.login=$SONAR_LOGIN -Dsonar.gitlab.project_id=$CI_PROJECT_PATH -Dsonar.gitlab.ref_name=$CI_COMMIT_REF_NAME -Dsonar.gitlab.commit_sha=$CI_COMMIT_SHA -Dsonar.gitlab.failure_notification_mode=exit-code -Dsonar.analysis.mode=publish
   only:
     - develop
+  allow_failure: true    
     
 
 
@@ -38,8 +40,9 @@ build:stable:
     expire_in: 10 mins
   only:
     - develop
+  allow_failure: true    
   script:
-    - mvn install -B -DskipTests=true -Dmaven.javadoc.skip=true -Drevision=$REVISION_STABLE
+    - mvn install -B -DskipTests=true -Dmaven.javadoc.skip=true -Drevision=$REVISION_UNSTABLE
     
 build:unstable:
   stage: build
@@ -47,6 +50,7 @@ build:unstable:
     expire_in: 10 mins
   only:
     - develop
+  allow_failure: true    
   script:
     - mvn install -B -DskipTests=true -Dmaven.javadoc.skip=true -Drevision=$REVISION_UNSTABLE
 
