@@ -198,3 +198,4 @@ sonar:
 * Repo: https://github.com/jeanmorais/sonar-maven-ci-example/blob/master/.gitlab-ci.yml
 * Doc Docker Sonar: https://docs.docker.com/samples/library/sonarqube/
 * https://hub.docker.com/_/sonarqube?tab=description
+* https://www.mkyong.com/maven/maven-jacoco-code-coverage-example/
