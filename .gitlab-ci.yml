@@ -22,20 +22,14 @@ sonarqube:issues:
     - mvn --batch-mode verify sonar:sonar -DskipTests=true -Drevision=$REVISION_UNSTABLE -Dsonar.host.url=$SONAR_URL -Dsonar.login=$SONAR_LOGIN -Dsonar.gitlab.project_id=$CI_PROJECT_PATH -Dsonar.gitlab.ref_name=$CI_COMMIT_REF_NAME -Dsonar.gitlab.commit_sha=$CI_COMMIT_SHA -Dsonar.gitlab.failure_notification_mode=exit-code -Dsonar.analysis.mode=issues
   only:
     - develop
-  tags:
-    - docker
 
 sonarqube:publish:
   stage: code_analysis
   script:
     - mvn --batch-mode verify sonar:sonar -Drevision=$REVISION_STABLE -Dsonar.host.url=$SONAR_URL -Dsonar.login=$SONAR_LOGIN -Dsonar.gitlab.project_id=$CI_PROJECT_PATH -Dsonar.gitlab.ref_name=$CI_COMMIT_REF_NAME -Dsonar.gitlab.commit_sha=$CI_COMMIT_SHA -Dsonar.gitlab.failure_notification_mode=exit-code -Dsonar.analysis.mode=publish
-    
   only:
     - develop
-    - /^\d+\.\d+\.\d+-rc\.[0-9]+$/
-    - /^\d+\.\d+\.\d+$/
-  tags:
-    - docker    
+    
 
 
 build:stable:
@@ -43,10 +37,7 @@ build:stable:
   artifacts:
     expire_in: 10 mins
   only:
-    - /^\d+\.\d+\.\d+-rc\.[0-9]+$/
-    - /^\d+\.\d+\.\d+$/
-  tags:
-    - docker
+    - develop
   script:
     - mvn install -B -DskipTests=true -Dmaven.javadoc.skip=true -Drevision=$REVISION_STABLE
     
@@ -56,8 +47,6 @@ build:unstable:
     expire_in: 10 mins
   only:
     - develop
-  tags:
-    - docker
   script:
     - mvn install -B -DskipTests=true -Dmaven.javadoc.skip=true -Drevision=$REVISION_UNSTABLE
 
