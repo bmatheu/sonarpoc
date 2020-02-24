@@ -1,0 +1,49 @@
+image: microsoft/dotnet:latest
+
+stages:
+  - test
+  - code_analysis
+  - deploy
+
+release:
+  stage: deploy
+  only:
+    - master
+  artifacts:
+    paths:
+      - publish/
+  script:
+    # The output path is relative to the position of the csproj-file
+     - dotnet publish -c Release -o  MyProject/MyProject.csproj
+
+
+test:
+  stage: test
+  variables:
+    test_path: "teste-api/"
+  script:
+    - "cd $test_path"
+    - "dotnet build"
+    - "dotnet test"
+  only:
+      - develop
+
+sonar:
+  stage: code_analysis
+  variables: 
+    SONAR_SCANNER_OPTS: "-Xmx1024m"
+  script: 
+    - export PATH="$PATH:/root/.dotnet/tools"
+    - export SONAR_SCANNER_OPTS
+    - apt-get update
+    - apt-get install openjdk-8-jre -y
+    - dotnet tool install --global dotnet-sonarscanner --version 4.4.2
+    
+    - dotnet tool install --global coverlet.console
+    - dotnet test ./ --configuration Debug --output ../../output-tests  /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput='./output-coverage/coverage.opencover.xml' /p:ExcludeByFile="tests/**"
+    
+    - dotnet sonarscanner begin /k:"$SONAR_PROJECT_KEY" /d:sonar.host.url="$SONAR_URL" /d:sonar.login="$SONAR_TOKEN" /d:sonar.gitlab.failure_notification_mode=exit-code /d:sonar.gitlab.project_id="$env:CI_PROJECT_PATH" /d:sonar.gitlab.commit_sha="$env:CI_COMMIT_SHA" /d:sonar.gitlab.ref_name="$env:CI_COMMIT_REF_NAME" /d:sonar.gitlab.json_mode=CODECLIMATE /d:sonar.analysis.mode=publish /d:sonar.cs.xunit.reportsPaths="%CD%\XUnitResults.xml" /d:sonar.cs.vscoveragexml.reportsPaths=**/*.coveragexml
+    - dotnet build
+    - dotnet sonarscanner end /d:sonar.login="$SONAR_TOKEN"
+  only:
+    - develop
