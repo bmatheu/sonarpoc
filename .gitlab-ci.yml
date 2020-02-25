@@ -35,7 +35,14 @@ sonar:
       /p:CoverletOutput='coverage.opencover.xml'
 
 
-    - dotnet sonarscanner begin /k:"$SONAR_PROJECT_KEY" /d:sonar.host.url="$SONAR_URL" /d:sonar.login="$SONAR_TOKEN" /d:sonar.analysis.mode=publish /d:sonar.analysis.mode=publish /d:sonar.cs.xunit.reportsPaths="%CD%\XUnitResults.xml" /d:sonar.cs.vscoveragexml.reportsPaths=**/*.coveragexml
+    - |
+      dotnet sonarscanner begin /k:"$SONAR_PROJECT_KEY" \
+      /d:sonar.host.url="$SONAR_URL" \
+      /d:sonar.login="$SONAR_TOKEN" \
+      /d:sonar.analysis.mode=publish \
+      /d:sonar.cs.xunit.reportsPaths="%CD%\XUnitResults.xml" \
+      /d:sonar.cs.vscoveragexml.reportsPaths=**/*.coveragexml
+      
     - dotnet build
     - dotnet sonarscanner end /d:sonar.login="$SONAR_TOKEN"
   only:
