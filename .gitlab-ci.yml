@@ -28,9 +28,25 @@ sonar:
     - dotnet tool install --global dotnet-sonarscanner --version 4.8.0
     - dotnet tool install --global coverlet.console --version 1.4.1
     
-    - dotnet test ./unit-testing-using-dotnet-test/PrimeService.Tests/ --configuration Debug --output ../../output-tests  /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput='./output-coverage/coverage.opencover.xml' /p:ExcludeByFile="tests/**"
-    
-    - dotnet sonarscanner begin /k:"$SONAR_PROJECT_KEY" /d:sonar.host.url="$SONAR_URL" /d:sonar.login="$SONAR_TOKEN" /d:sonar.analysis.mode=publish /d:sonar.cs.vscoveragexml.reportsPaths=**/*.coveragexml
+  
+    - |
+      dotnet test ./unit-testing-using-dotnet-test/PrimeService.Tests/ --configuration Debug --output ../../output-tests \
+      /p:CollectCoverage=true \
+      /p:CoverletOutputFormat=opencover \
+      /p:CoverletOutput='coverage.opencover.xml'
+
+    - |
+      dotnet sonarscanner begin /k:"$SONAR_PROJECT_KEY" \
+      /d:sonar.host.url="$SONAR_URL" \
+      /d:sonar.login="$SONAR_TOKEN" \
+      /d:sonar.verbose=true \
+      /d:sonar.cs.opencover.reportsPaths="/builds/cristianvitortrucco/sonarpoc/unit-testing-using-dotnet-test/coverage.opencover.xml" \
+      /d:sonar.gitlab.failure_notification_mode="exit-code" \
+      /d:sonar.analysis.mode="publish" \
+      /d:sonar.gitlab.commit_sha="$CI_COMMIT_SHA" \
+      /d:sonar.gitlab.ref_name="$CI_COMMIT_REF_NAME" \
+      /d:sonar.exclusions=""**/*Test*.cs,**"
+
     - dotnet build ./unit-testing-using-dotnet-test/
     - dotnet sonarscanner end /d:sonar.login="$SONAR_TOKEN"
 
