@@ -34,20 +34,12 @@ sonar:
       /p:CoverletOutputFormat=opencover \
       /p:CoverletOutput='coverage.opencover.xml' 
 
-    - ls -lhart /builds/cristianvitortrucco/sonarpoc/ || true
-    - ls -lhart /builds/cristianvitortrucco/ || true
-
     - |
       dotnet sonarscanner begin /k:"$SONAR_PROJECT_KEY" \
       /d:sonar.host.url="$SONAR_URL" \
       /d:sonar.login="$SONAR_TOKEN" \
-      /d:sonar.verbose=true \
       /d:sonar.cs.opencover.reportsPaths="/builds/cristianvitortrucco/sonarpoc/unit-testing-using-dotnet-test/PrimeService.Tests/coverage.opencover.xml" \
-      /d:sonar.gitlab.failure_notification_mode="exit-code" \
-      /d:sonar.analysis.mode="publish" \
-      /d:sonar.gitlab.commit_sha="$CI_COMMIT_SHA" \
-      /d:sonar.gitlab.ref_name="$CI_COMMIT_REF_NAME" \
-      /d:sonar.exclusions="**/*Test*.cs,**"
+      /d:sonar.analysis.mode="publish" 
 
     - dotnet build ./unit-testing-using-dotnet-test/
     - dotnet sonarscanner end /d:sonar.login="$SONAR_TOKEN"
