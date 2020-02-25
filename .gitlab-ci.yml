@@ -34,8 +34,8 @@ sonar:
       /p:CoverletOutputFormat=opencover \
       /p:CoverletOutput='coverage.opencover.xml' 
 
-    - ls -lhart /builds/cristianvitortrucco/sonarpoc/unit-testing-using-dotnet-test/PrimeService.Tests/ || true
-    - ls -lhart /builds/cristianvitortrucco/sonarpoc/unit-testing-using-dotnet-test/ || true
+    - ls -lhart /builds/cristianvitortrucco/sonarpoc/ || true
+    - ls -lhart /builds/cristianvitortrucco/ || true
 
     - |
       dotnet sonarscanner begin /k:"$SONAR_PROJECT_KEY" \
