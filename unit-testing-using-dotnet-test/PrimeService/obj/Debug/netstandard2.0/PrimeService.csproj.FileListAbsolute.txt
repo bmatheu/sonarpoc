@@ -1,0 +1,8 @@
+/Users/cristian-trucco/Documents/projetos/teste/artigo-sonar/sonarpoc/unit-testing-using-dotnet-test/PrimeService/bin/Debug/netstandard2.0/PrimeService.deps.json
+/Users/cristian-trucco/Documents/projetos/teste/artigo-sonar/sonarpoc/unit-testing-using-dotnet-test/PrimeService/bin/Debug/netstandard2.0/PrimeService.dll
+/Users/cristian-trucco/Documents/projetos/teste/artigo-sonar/sonarpoc/unit-testing-using-dotnet-test/PrimeService/bin/Debug/netstandard2.0/PrimeService.pdb
+/Users/cristian-trucco/Documents/projetos/teste/artigo-sonar/sonarpoc/unit-testing-using-dotnet-test/PrimeService/obj/Debug/netstandard2.0/PrimeService.csprojAssemblyReference.cache
+/Users/cristian-trucco/Documents/projetos/teste/artigo-sonar/sonarpoc/unit-testing-using-dotnet-test/PrimeService/obj/Debug/netstandard2.0/PrimeService.AssemblyInfoInputs.cache
+/Users/cristian-trucco/Documents/projetos/teste/artigo-sonar/sonarpoc/unit-testing-using-dotnet-test/PrimeService/obj/Debug/netstandard2.0/PrimeService.AssemblyInfo.cs
+/Users/cristian-trucco/Documents/projetos/teste/artigo-sonar/sonarpoc/unit-testing-using-dotnet-test/PrimeService/obj/Debug/netstandard2.0/PrimeService.dll
+/Users/cristian-trucco/Documents/projetos/teste/artigo-sonar/sonarpoc/unit-testing-using-dotnet-test/PrimeService/obj/Debug/netstandard2.0/PrimeService.pdb
