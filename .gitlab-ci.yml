@@ -1,21 +1,8 @@
-image: microsoft/dotnet:latest
+image: microsoft/dotnet:2.1-sdk
 
 stages:
   - test
   - code_analysis
-  - deploy
-
-release:
-  stage: deploy
-  only:
-    - master
-  artifacts:
-    paths:
-      - publish/
-  script:
-    # The output path is relative to the position of the csproj-file
-     - dotnet publish -c Release -o  MyProject/MyProject.csproj
-
 
 test:
   stage: test
@@ -41,8 +28,13 @@ sonar:
     - dotnet tool install --global dotnet-sonarscanner --version 4.4.2
     - dotnet tool install --global coverlet.console --version 1.4.1
     
-    - dotnet test ./ --configuration Debug --output ../../output-tests  /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput='./output-coverage/coverage.opencover.xml' /p:ExcludeByFile="tests/**"
-    
+    - |
+      dotnet test ./teste-api --configuration Debug --output ../../output-tests \
+      /p:CollectCoverage=true \
+      /p:CoverletOutputFormat=opencover \
+      /p:CoverletOutput='coverage.opencover.xml'
+
+
     - dotnet sonarscanner begin /k:"$SONAR_PROJECT_KEY" /d:sonar.host.url="$SONAR_URL" /d:sonar.login="$SONAR_TOKEN" /d:sonar.analysis.mode=publish
     - dotnet build
     - dotnet sonarscanner end /d:sonar.login="$SONAR_TOKEN"
