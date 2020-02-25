@@ -28,7 +28,7 @@ sonar:
     - dotnet tool install --global dotnet-sonarscanner --version 4.8.0
     - dotnet tool install --global coverlet.console --version 1.4.1
     
-    - dotnet test ./ --configuration Debug --output ../../output-tests  /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput='./output-coverage/coverage.opencover.xml' /p:ExcludeByFile="tests/**"
+    - dotnet test ./unit-testing-using-dotnet-test/PrimeService.Tests/ --configuration Debug --output ../../output-tests  /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput='./output-coverage/coverage.opencover.xml' /p:ExcludeByFile="tests/**"
     
     - dotnet sonarscanner begin /k:"$SONAR_PROJECT_KEY" /d:sonar.host.url="$SONAR_URL" /d:sonar.login="$SONAR_TOKEN" /d:sonar.analysis.mode=publish /d:sonar.cs.vscoveragexml.reportsPaths=**/*.coveragexml
     - dotnet build
