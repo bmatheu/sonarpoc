@@ -32,8 +32,7 @@ sonar:
       dotnet test ./unit-testing-using-dotnet-test/PrimeService.Tests/ --configuration Debug --output ../../output-tests \
       /p:CollectCoverage=true \
       /p:CoverletOutputFormat=opencover \
-      /p:CoverletOutput='coverage.opencover.xml' \
-      ls -lhart || true
+      /p:CoverletOutput='coverage.opencover.xml' 
 
     - ls -lhart /builds/cristianvitortrucco/sonarpoc/unit-testing-using-dotnet-test/PrimeService.Tests/ || true
     - ls -lhart /builds/cristianvitortrucco/sonarpoc/unit-testing-using-dotnet-test/ || true
